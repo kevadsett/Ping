@@ -17,7 +17,7 @@ namespace Ping
 		private List<SoundPlayer> _pingHitSoundPlayers;
 		private List<Sound> _pingSounds;
 		
-		private static Boolean DEBUG_BOUNDINGBOXES = false;
+		private static Boolean DEBUG_BOUNDINGBOXES = true;
 		
 		public GameScene ()
 		{
@@ -30,7 +30,7 @@ namespace Ping
 			_scoreboard = new ScoreBoard();
 			
 			this.AddChild(_scoreboard);
-			this.AddChild(_ball);
+			this.AddChild(ball);
 			this.AddChild(_player);
 			this.AddChild(_ai);
 			
@@ -59,7 +59,7 @@ namespace Ping
 			_pingSounds = new List<Sound>();
 			_pingHitSoundPlayers = new List<SoundPlayer>();
 			for (int i = 0; i < 5; i++) {
-				_pingSounds.Add(new Sound("/Application/audio/hit0" + i));
+				_pingSounds.Add(new Sound("/Application/audio/hit0" + i + ".wav"));
 				_pingHitSoundPlayers.Add(_pingSounds[i].CreatePlayer());
 			}
 			
@@ -79,7 +79,7 @@ namespace Ping
 				angle += (float)rand.Next() > 0.5 ? 15.0f : -15.0f;
 			}
 			
-			_physics.SceneBodies[(int)PongPhysics.BODIES.Ball].Velocity = 
+			_physics.SceneBodies[(int)PingPhysics.BODIES.Ball].Velocity = 
 				new Vector2(0.0f, 5.0f).Rotate (PhysicsUtility.GetRadian(angle));
 		}
 		
@@ -96,13 +96,13 @@ namespace Ping
 			Vector2 dummy2 = new Vector2();
 			
 			// Update the physics simulation
-			_physics.Simulate(-1, ref dummy1, ref dummy2);
+			_physics.Simulate(-1, dummy1, dummy2);
 			
 			// check the ball hit a paddle, play a sound
 			if(_physics.QueryContact((uint)PingPhysics.BODIES.Ball, (uint)PingPhysics.BODIES.Player) ||
 			   _physics.QueryContact((uint)PingPhysics.BODIES.Ball, (uint)PingPhysics.BODIES.Ai)) {
 				bool soundIsPlaying = false;
-				for(uint i = 0; i < _pingSounds.Count; i++) {
+				for(int i = 0; i < _pingSounds.Count; i++) {
 					if(_pingHitSoundPlayers[i].Status == SoundStatus.Playing) {
 						soundIsPlaying = true;
 						break;
@@ -110,7 +110,7 @@ namespace Ping
 				}
 				if(!soundIsPlaying) {
 					System.Random rand = new System.Random();
-					_pingHitSoundPlayers[(int)rand.Next(0, i)].Play();
+					_pingHitSoundPlayers[(int)System.Math.Round((double)rand.Next(0, _pingSounds.Count))].Play();
 				}
 			}
 			
@@ -118,11 +118,11 @@ namespace Ping
 			Results result = Results.StillPlaying;
 			bool scored = false;
 			
-			if(ball.Position.y > Director.Instance.GL.Context.GetViewport().Height + ball.Scale.Y/2) {
+			if(ball.Position.Y > Director.Instance.GL.Context.GetViewport().Height + ball.Scale.Y/2) {
 				result = _scoreboard.AddScore(true);
 				scored = true;
 			}
-			if(ball.Position.y < 0 - ball.Scale.Y/2) {
+			if(ball.Position.Y < 0 - ball.Scale.Y/2) {
 				result = _scoreboard.AddScore(false);
 				scored = true;
 			}
