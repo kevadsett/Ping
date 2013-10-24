@@ -1,0 +1,16 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Ping\GameScene.cs">
+    <Files>
+      <File FileName="Ping\AppMain.cs" Line="14" Column="53" />
+      <File FileName="Ping\TitleScene.cs" Line="70" Column="40" />
+      <File FileName="Ping\MenuScene.cs" Line="39" Column="40" />
+      <File FileName="Ping\PingPhysics.cs" Line="85" Column="1" />
+      <File FileName="Ping\GameScene.cs" Line="55" Column="7" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

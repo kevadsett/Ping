@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{85FAFE2B-7317-4C63-8589-1A2B33BE77CA}</ProjectGuid>
+    <ProjectTypeGuids>{69878862-DA7D-4DC6-B0A1-50D8FAB4242F};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Ping</RootNamespace>
+    <AssemblyName>Ping</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Sce.PlayStation.Core" />
+    <Reference Include="Sce.PlayStation.HighLevel.GameEngine2D" />
+    <Reference Include="Sce.PlayStation.HighLevel.Physics2D" />
+    <Reference Include="Sce.PlayStation.HighLevel.UI" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppMain.cs" />
+    <Compile Include="TitleScene.cs" />
+    <Compile Include="MenuScene.cs" />
+    <Compile Include="PingPhysics.cs" />
+    <Compile Include="GameScene.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ShaderProgram Include="shaders\Simple.fcg" />
+    <ShaderProgram Include="shaders\Simple.vcg" />
+  </ItemGroup>
+  <ItemGroup>
+    <PsmMetadata Include="app.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Sce\Sce.Psm.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="audio\" />
+    <Folder Include="images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="images\ball.png" />
+    <Content Include="images\loser.png" />
+    <Content Include="images\paddle.png" />
+    <Content Include="images\title.png" />
+    <Content Include="images\winner.png" />
+    <Content Include="audio\hit00.wav" />
+    <Content Include="audio\hit01.wav" />
+    <Content Include="audio\hit02.wav" />
+    <Content Include="audio\hit03.wav" />
+    <Content Include="audio\hit04.wav" />
+    <Content Include="audio\titlesong.mp3" />
+    <Content Include="audio\wikistep.mp3" />
+  </ItemGroup>
+</Project>
