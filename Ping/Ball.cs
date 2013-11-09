@@ -11,7 +11,7 @@ namespace Ping
 	{
 		private PhysicsBody _physicsBody;
 		
-		public const float BALL_VELOCITY = 5.0f;
+		public const float BALL_VELOCITY = 7.0f;
 		
 		public Ball (PhysicsBody physicsBody)
 		{
@@ -19,7 +19,8 @@ namespace Ping
 			
 			this.TextureInfo = new TextureInfo(new Texture2D("/Application/images/ball.png", false));
 			this.Scale = this.TextureInfo.TextureSizef;
-			this.Pivot = new Sce.PlayStation.Core.Vector2(
+			this.Pivot = new Sce.PlayStation.Core.Vector2(0.5f,0.5f);
+			this.Position = new Sce.PlayStation.Core.Vector2(
 				Director.Instance.GL.Context.GetViewport().Width / 2 - Scale.X / 2,
 				Director.Instance.GL.Context.GetViewport().Height / 2 - Scale.Y / 2
 				);

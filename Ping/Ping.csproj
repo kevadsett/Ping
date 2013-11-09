@@ -48,6 +48,7 @@
     <Compile Include="Paddle.cs" />
     <Compile Include="ScoreBoard.cs" />
     <Compile Include="GameOverScene.cs" />
+    <Compile Include="AudioManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />

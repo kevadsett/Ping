@@ -12,15 +12,20 @@ namespace Ping
 	{
 		private Paddle _player, _ai;
 		public static Ball ball;
+		
+		public float shakeAmount = 10;
 		private PingPhysics _physics;
 		private ScoreBoard _scoreboard;
 		private List<SoundPlayer> _pingHitSoundPlayers;
 		private List<Sound> _pingSounds;
 		
-		private static Boolean DEBUG_BOUNDINGBOXES = true;
+		private static Boolean DEBUG_BOUNDINGBOXES = false;
 		
 		public GameScene ()
 		{
+			if(AppMain.am != null) {
+				AppMain.am.changeSong(true);
+			}
 			this.Camera.SetViewFromViewport();
 			_physics = new PingPhysics();
 			
@@ -86,7 +91,18 @@ namespace Ping
 		public override void Update (float dt)
 		{
 			base.Update (dt);
-			
+			if(this.shakeAmount > 0) {
+				this.shakeAmount -= 0.2f;
+			} else {
+				this.shakeAmount = 0;
+			}
+			if(_physics.QueryContact(0, 1) || _physics.QueryContact(0, 2)) {
+				this.shakeAmount = 10;
+			}
+			Random rand = new Random();
+			this.Camera2D.SetViewFromWidthAndBottomLeft(
+				Director.Instance.GL.Context.GetViewport().Width,
+				new Vector2 (rand.Next(-(int)this.shakeAmount, (int)this.shakeAmount), rand.Next(-(int)this.shakeAmount, (int)this.shakeAmount)));
 			if(Input2.GamePad0.Select.Press) {
 				Director.Instance.ReplaceScene(new MenuScene());
 			}
@@ -109,7 +125,6 @@ namespace Ping
 					}
 				}
 				if(!soundIsPlaying) {
-					System.Random rand = new System.Random();
 					_pingHitSoundPlayers[(int)System.Math.Round((double)rand.Next(0, _pingSounds.Count))].Play();
 				}
 			}

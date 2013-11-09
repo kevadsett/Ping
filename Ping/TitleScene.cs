@@ -14,11 +14,13 @@ namespace Ping
 		private TextureInfo _textureInfo;
 		private Texture2D _texture;
 		
-		private Bgm _titleSong;
-		private BgmPlayer _songPlayer;
-		
 		public TitleScene ()
 		{
+			if(AppMain.am == null) {
+				AppMain.am = new AudioManager();
+			} else {
+				AppMain.am.changeSong(false);
+			}
 			this.Camera.SetViewFromViewport();
 			_texture = new Texture2D("/Application/images/title.png", false);
 			_textureInfo = new TextureInfo(_texture);
@@ -35,31 +37,10 @@ namespace Ping
 			ActionManager.Instance.AddAction(tintAction, titleScreen);
 			tintAction.Run();
 			
-			_titleSong = new Bgm("/Application/audio/titlesong.mp3");
-			
-			if(_songPlayer != null) {
-				_songPlayer.Dispose();
-			}
-			_songPlayer = _titleSong.CreatePlayer();
-			
 			Scheduler.Instance.ScheduleUpdateForTarget(this, 0, false);
 			
 			// Clear any queued clicks so we don't immediately exit if coming in from the menu
 			Touch.GetData (0).Clear();
-		}
-		
-		public override void OnEnter ()
-		{
-			_songPlayer.Loop = true;
-			_songPlayer.Play ();
-		}
-		
-		public override void OnExit ()
-		{
-			base.OnExit ();
-			_songPlayer.Stop();
-			_songPlayer.Dispose();
-			_songPlayer = null;
 		}
 		
 		public override void Update (float dt)

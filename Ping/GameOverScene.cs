@@ -35,8 +35,8 @@ namespace Ping
 		public override void Update (float dt)
 		{
 			base.Update (dt);
-			int touchCount = Touch.GetData(0).Count;
-			if(touchCount > 0 || Input2.GamePad0.Cross.Press) {
+			var touches = Touch.GetData(0).ToArray();
+			if((touches.Length > 0 && touches[0].Status == TouchStatus.Down) || Input2.GamePad0.Cross.Press) {
 				Director.Instance.ReplaceScene(new TitleScene());
 			}
 		}

@@ -6,6 +6,7 @@ namespace Ping
 {
 	public class AppMain
 	{
+		public static AudioManager am;
 		
 		public static void Main (string[] args)
 		{
@@ -13,6 +14,5 @@ namespace Ping
 			UISystem.Initialize(Director.Instance.GL.Context);
 			Director.Instance.RunWithScene(new TitleScene());
 		}
-
 	}
 }

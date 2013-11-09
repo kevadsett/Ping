@@ -34,7 +34,7 @@ namespace Ping
 			// turn up the BOUNCE!
 			this.RestitutionCoeff = 1.0f;
 			
-			this.NumBody = 4; // Ball, 2 paddles, 2 bumpers
+			this.NumBody = 5; // Ball, 2 paddles, 2 bumpers
 			this.NumShape = 3; // One of each
 			
 			// creating the ball
@@ -70,14 +70,14 @@ namespace Ping
 			this.SceneBodies[3].Position = new Vector2(0, _screenHeight/2f) / PtoM;
 			this.SceneBodies[3].ShapeIndex = 2;
 			this.SceneBodies[3].Rotation = 0;
-			this.sceneBodies[3].SetBodyStatic();
+			this.SceneBodies[3].SetBodyStatic();
 			
 			// Right bumper
 			this.SceneBodies[4] = new PhysicsBody(this.SceneShapes[2], PhysicsUtility.FltMax);
-			this.SceneBodies[4].Position = new Vector2(_screenWidth, _screenHeight/2f) / PtoM;
+			this.SceneBodies[4].Position = new Vector2(_screenWidth - 10.0f, _screenHeight/2f) / PtoM;
 			this.SceneBodies[4].ShapeIndex = 2;
 			this.SceneBodies[4].Rotation = 0;
-			this.sceneBodies[4].SetBodyStatic();
+			this.SceneBodies[4].SetBodyStatic();
 		}
 	}
 }
